@@ -1,0 +1,69 @@
+---
+title: "createData"
+author: "Sonia Mannan"
+date: "5/7/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+setwd('/Users/soniamannan/Documents/GE_Hackathon/IEEEPaper')
+data <- read.csv('combined_tree_data.csv')
+head(data)
+```
+
+```{r}
+colnames(data)[colnames(data)=="MODEL6_VOL"] <- "NumPedestrians"
+colnames(data)[colnames(data)=="TOTEMP2"] <- "NumJobs"
+colnames(data)[colnames(data)=="YR2011_PM"] <- "NumBikes"
+colnames(data)[colnames(data)=="num_trees"] <- "NumTrees"
+```
+
+
+
+```{r}
+pairs(~NumPedestrians+NumJobs+NumBikes+NumTrees,data=data, 
+   main="Simple Scatterplot Matrix", log = "y")
+```
+
+```{r}
+library(GGally)
+library(ggplot2)
+```
+
+```{r}
+data.log <- data
+data.log = data.log[data.log$NumBikes > 0,]
+data.log[, c(2,4,5)] <- log(data.log[c(2,4,5)], 10)
+ggpairs(data.log[,c(2,4,5,8)])
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
